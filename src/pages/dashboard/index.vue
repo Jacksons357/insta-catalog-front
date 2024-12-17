@@ -6,6 +6,6 @@ definePage({
 
 <template>
   <h1>
-    Dashboard, welcome!
+    <h1>Dashboard</h1>
   </h1>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useUser } from '@/composables/useUser';
-import router from '@/router';
+import { useUser } from '@/composables/useUser'
+import router from '@/router'
 
 const { isAuthenticated } = useUser()
 

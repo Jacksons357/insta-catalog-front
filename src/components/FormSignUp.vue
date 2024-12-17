@@ -2,7 +2,14 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useField, useForm } from 'vee-validate'
-import router from '@/router';
+import router from '@/router'
+import { useUser } from '@/composables/useUser';
+
+const { isAuthenticated } = useUser()
+
+if (isAuthenticated) {
+  router.push('/dashboard')
+}
 
 const form = ref(true)
 const loading = ref(false)

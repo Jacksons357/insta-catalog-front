@@ -3,7 +3,6 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useField, useForm } from 'vee-validate'
 import { useUser } from '@/composables/useUser';
-import router from '@/router';
 
 const formSchema = toTypedSchema(
   z.object({
@@ -37,6 +36,9 @@ const onSubmit = handleSubmit(async (values) => {
   loading.value = true
 
   try {
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    setTimeout(() => (loading.value = false), 2000)
+
     await login({
       email: values.email,
       password: values.password
@@ -47,12 +49,7 @@ const onSubmit = handleSubmit(async (values) => {
     loading.value = false
   }
 
-  setTimeout(() => (loading.value = false), 2000)
-
   resetForm()
-  console.log('chegou aqui')
-
-  router.push('/dashboard')
 })
 </script>
 
