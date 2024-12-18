@@ -15,7 +15,7 @@ export interface LoginResponse {
 
 export async function login(credentials: CredentialsProps): Promise<LoginResponse>{
   const response = await fetch(
-    'http://localhost:3333/api/users/login',
+    `${import.meta.env.VITE_API_URL}/users/login`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -2,7 +2,7 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useField, useForm } from 'vee-validate'
-import { useUser } from '@/composables/useUser';
+import { useUser } from '@/composables/useUser'
 
 const formSchema = toTypedSchema(
   z.object({
@@ -36,7 +36,7 @@ const onSubmit = handleSubmit(async (values) => {
   loading.value = true
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise(resolve => setTimeout(resolve, 2500))
     setTimeout(() => (loading.value = false), 2000)
 
     await login({

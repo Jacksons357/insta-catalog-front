@@ -24,9 +24,3 @@ declare module 'vue-router/auto-routes' {
     '/sign-up/': RouteRecordInfo<'/sign-up/', '/sign-up', Record<never, never>, Record<never, never>>,
   }
 }
-
-declare module 'vue-router' {
-  interface RouteMeta {
-    requiresAuth: boolean
-  }
-}

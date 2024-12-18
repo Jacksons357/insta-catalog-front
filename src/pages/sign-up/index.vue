@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+//
+</script>
+
 <template>
   <v-row>
     <v-col

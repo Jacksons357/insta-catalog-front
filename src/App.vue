@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+  //
+</script>
+
 <template>
   <v-app>
     <v-main>
@@ -6,6 +10,4 @@
   </v-app>
 </template>
 
-<script lang="ts" setup>
-  //
-</script>
+

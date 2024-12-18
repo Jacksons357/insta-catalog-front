@@ -3,9 +3,11 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { useField, useForm } from 'vee-validate'
 import router from '@/router'
-import { useUser } from '@/composables/useUser';
+import { useUserStore } from '@/stores/app'
+import { useUser } from '@/composables/useUser'
 
-const { isAuthenticated } = useUser()
+const { isAuthenticated } = useUserStore()
+const { register } = useUser()
 
 if (isAuthenticated) {
   router.push('/dashboard')
@@ -41,19 +43,25 @@ const email = useField('email')
 const password = useField('password')
 
 const onSubmit = handleSubmit(async (values) => {
-  console.log(values)
-
   if (!form.value) return
-
   loading.value = true
 
-  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-  await sleep(3000)
+  try {
+    await new Promise(resolve => setTimeout(resolve, 2500))
+    setTimeout(() => (loading.value = false), 2000)
 
-  loading.value = false
+    await register({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    })
+  } catch(error){
+    console.error(error)
+  } finally {
+    loading.value = false
+  }
 
   resetForm()
-  router.push('/sign-in')
 })
 </script>
 

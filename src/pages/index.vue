@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useUser } from '@/composables/useUser';
+import { useUserStore } from '@/stores/app';
 
-const { isAuthenticated } = useUser()
+const { isAuthenticated } = useUserStore()
 
 </script>
 

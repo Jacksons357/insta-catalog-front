@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useUser } from '@/composables/useUser'
 import router from '@/router'
+import { useUserStore } from '@/stores/app';
 
-const { isAuthenticated } = useUser()
+const { isAuthenticated } = useUserStore()
 
-if (isAuthenticated.value){
+if (isAuthenticated){
   router.push('/dashboard')
 }
 

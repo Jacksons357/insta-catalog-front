@@ -6,11 +6,11 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import { setupLayouts } from 'virtual:generated-layouts'
-import { routes } from 'vue-router/auto-routes'
-import { useUser } from '@/composables/useUser'
+// import { setupLayouts } from 'virtual:generated-layouts'
+// import { routes } from 'vue-router/auto-routes'
 import type { NavigationGuardNext } from 'vue-router'
 import type { RouteLocationNormalized } from 'vue-router'
+import { useUserStore } from '@/stores/app'
 
 // setupLayouts(routes),
 
@@ -36,7 +36,6 @@ const router = createRouter({
         requiresAuth: true
       }
     },
-    setupLayouts(routes)
   ],
 })
 
@@ -44,9 +43,9 @@ router.beforeEach((
   to: RouteLocationNormalized, 
   from: RouteLocationNormalized, 
   next: NavigationGuardNext) => {
-  const { isAuthenticated } = useUser()
+  const { isAuthenticated } = useUserStore()
 
-  if (to.meta.requiresAuth && !isAuthenticated.value) {
+  if (to.meta.requiresAuth && !isAuthenticated) {
     next({ path: '/sign-in' })
   } else {
     next()
