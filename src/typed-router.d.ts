@@ -20,7 +20,17 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/dashboard/': RouteRecordInfo<'/dashboard/', '/dashboard', Record<never, never>, Record<never, never>>,
+    '/dashboard/teste/': RouteRecordInfo<'/dashboard/teste/', '/dashboard/teste', Record<never, never>, Record<never, never>>,
     '/sign-in/': RouteRecordInfo<'/sign-in/', '/sign-in', Record<never, never>, Record<never, never>>,
     '/sign-up/': RouteRecordInfo<'/sign-up/', '/sign-up', Record<never, never>, Record<never, never>>,
+  }
+}
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    // is optional
+    isAdmin?: boolean
+    // must be declared by every route
+    requiresAuth: boolean
   }
 }

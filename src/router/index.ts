@@ -6,20 +6,18 @@
 
 // Composables
 import { createRouter, createWebHistory } from 'vue-router/auto'
-// import { setupLayouts } from 'virtual:generated-layouts'
-// import { routes } from 'vue-router/auto-routes'
-import type { NavigationGuardNext } from 'vue-router'
-import type { RouteLocationNormalized } from 'vue-router'
 import { useUserStore } from '@/stores/app'
-
-// setupLayouts(routes),
+import Dashboard from '@/layouts/dashboard.vue'
+import type { RouteLocationNormalized } from 'vue-router'
+import type { NavigationGuardNext } from 'vue-router'
+import Index from '@/pages/dashboard/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: () => import('@/pages/index.vue')
+      component: () => import('@/pages/index.vue'),
     },
     {
       path: '/sign-in',
@@ -31,18 +29,29 @@ const router = createRouter({
     },
     {
       path: '/dashboard',
-      component: () => import('@/pages/dashboard/index.vue'),
+      component: Dashboard,
       meta: {
         requiresAuth: true
-      }
+      },
+      children: [
+        {
+          path: '',
+          component: Index
+        },
+        {
+          path: 'teste',
+          component: () => import('@/pages/dashboard/teste/index.vue')
+        }
+      ]
     },
-  ],
+  ]
 })
 
 router.beforeEach((
   to: RouteLocationNormalized, 
   from: RouteLocationNormalized, 
-  next: NavigationGuardNext) => {
+  next: NavigationGuardNext
+) => {
   const { isAuthenticated } = useUserStore()
 
   if (to.meta.requiresAuth && !isAuthenticated) {
@@ -51,6 +60,7 @@ router.beforeEach((
     next()
   }
 })
+
 
 router.onError((err, to: RouteLocationNormalized) => {
   if (err?.message?.includes?.('Failed to fetch dynamically imported module')) {

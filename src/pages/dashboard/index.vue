@@ -5,7 +5,10 @@ definePage({
 </script>
 
 <template>
-  <h1>
-    <h1>Dashboard</h1>
-  </h1>
+  <v-app>
+    <v-main>
+      <h1>dashboard</h1>
+      <router-view name="dashboard" />
+    </v-main>
+  </v-app>
 </template>
